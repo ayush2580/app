@@ -37,23 +37,32 @@ app.post("/saveTransaction", (req, res) => {
 
 // Update Inventory
 app.post("/updateInventory", (req, res) => {
-    const inventory = JSON.parse(fs.readFileSync("inventory.json"));
-    inventory.products = inventory.products || []; // Ensure products array exists
+    try {
+        const inventory = JSON.parse(fs.readFileSync("inventory.json"));
+        inventory.products = inventory.products || [];
 
-    if (!req.body.name || !req.body.price || !req.body.stock) {
-        return res.status(400).send({ message: "Invalid inventory data" });
+        const productIndex = inventory.products.findIndex(p => p.name === req.body.name);
+        if (productIndex !== -1) {
+            // Update existing product
+            inventory.products[productIndex].price = req.body.price;
+            inventory.products[productIndex].stock = req.body.stock;
+        } else {
+            // Add new product
+            inventory.products.push({
+                name: req.body.name,
+                price: req.body.price,
+                stock: req.body.stock,
+                sold: 0
+            });
+        }
+
+        fs.writeFileSync("inventory.json", JSON.stringify(inventory, null, 2));
+
+        res.status(200).send({ message: "Inventory updated successfully!" });
+    } catch (error) {
+        console.error("Error updating inventory:", error);
+        res.status(500).send({ message: "Failed to update inventory" });
     }
-
-    const product = inventory.products.find(p => p.name === req.body.name);
-    if (product) {
-        product.price = req.body.price;
-        product.stock = req.body.stock;
-    } else {
-        inventory.products.push({ name: req.body.name, price: req.body.price, stock: req.body.stock, sold: 0 });
-    }
-
-    fs.writeFileSync("inventory.json", JSON.stringify(inventory, null, 2));
-    res.status(200).send({ message: "Inventory updated!" });
 });
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
