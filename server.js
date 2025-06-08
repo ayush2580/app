@@ -1,3 +1,10 @@
+const express = require("express");
+const fs = require("fs");
+
+const app = express(); // This defines 'app'
+app.use(express.json());
+app.use(express.static("."));
+
 app.post("/saveTransaction", (req, res) => {
     const transactions = JSON.parse(fs.readFileSync("transactions.json"));
     const inventory = JSON.parse(fs.readFileSync("inventory.json"));
