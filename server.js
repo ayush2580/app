@@ -1,5 +1,5 @@
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+
 
 const express = require("express");
 const fs = require("fs");
@@ -8,6 +8,7 @@ const app = express(); // This defines 'app'
 app.use(express.json());
 app.use(express.static("."));
 
+app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
 app.post("/saveTransaction", (req, res) => {
     const transactions = JSON.parse(fs.readFileSync("transactions.json"));
     const inventory = JSON.parse(fs.readFileSync("inventory.json"));
