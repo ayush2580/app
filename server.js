@@ -38,30 +38,20 @@ app.post("/saveTransaction", (req, res) => {
 // Update Inventory
 app.post("/updateInventory", (req, res) => {
     try {
+        console.log("Received inventory update request:", req.body); // Debugging
         const inventory = JSON.parse(fs.readFileSync("inventory.json"));
-        inventory.products = inventory.products || [];
-
-        const productIndex = inventory.products.findIndex(p => p.name === req.body.name);
-        if (productIndex !== -1) {
-            // Update existing product
-            inventory.products[productIndex].price = req.body.price;
-            inventory.products[productIndex].stock = req.body.stock;
+        const product = inventory.products.find(p => p.name === req.body.name);
+        if (product) {
+            product.price = req.body.price;
+            product.stock = req.body.stock;
         } else {
-            // Add new product
-            inventory.products.push({
-                name: req.body.name,
-                price: req.body.price,
-                stock: req.body.stock,
-                sold: 0
-            });
+            inventory.products.push({ name: req.body.name, price: req.body.price, stock: req.body.stock, sold: 0 });
         }
-
         fs.writeFileSync("inventory.json", JSON.stringify(inventory, null, 2));
-
-        res.status(200).send({ message: "Inventory updated successfully!" });
+        res.status(200).send({ message: "Inventory updated!" });
     } catch (error) {
-        console.error("Error updating inventory:", error);
-        res.status(500).send({ message: "Failed to update inventory" });
+        console.error("Inventory update error:", error);
+        res.status(500).send({ message: "Error updating inventory" });
     }
 });
 const PORT = process.env.PORT || 3000;
