@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventory</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="transactions.html">Transactions</a>
+        <a href="inventory.html">Inventory</a>
+        <button id="darkModeToggle">🌙 Dark Mode</button>
+    </nav>
+
+    <h1>Inventory Management</h1>
+    <table id="inventoryTable">
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Sold</th>
+        </tr>
+    </table>
+
+    <h2>Add or Update Product</h2>
+    <form id="updateInventoryForm">
+        <label>Product Name: <input type="text" id="productName"></label>
+        <label>Price: <input type="number" id="productPrice"></label>
+        <label>Stock: <input type="number" id="productStock"></label>
+        <button type="submit">Update Inventory</button>
+    </form>
+
+    <script src="script.js"></script>
+</body>
+</html>
