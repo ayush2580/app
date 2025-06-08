@@ -7,18 +7,25 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <button id="darkModeToggle">🌙 Dark Mode</button>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="transactions.html">Transactions</a>
+        <a href="inventory.html">Inventory</a>
+        <button id="darkModeToggle">🌙 Dark Mode</button>
+    </nav>
+
     <h1>Generate Invoice</h1>
     <form id="invoiceForm">
         <label>Name: <input type="text" id="customerName" required></label>
         <label>Phone: <input type="text" id="customerPhone" required></label>
-        <label>Product:
+        <label>Product: 
             <select id="productSelect"></select>
         </label>
         <label>Price: <input type="number" id="customPrice"></label>
         <label>Quantity: <input type="number" id="quantity" min="1" required></label>
         <button type="submit">Generate Invoice</button>
     </form>
+
     <h2>Invoice</h2>
     <div id="invoiceDisplay"></div>
 
