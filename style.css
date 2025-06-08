@@ -3,10 +3,23 @@ body {
     background-color: white;
     color: black;
     transition: 0.3s;
+    margin: 0;
+    padding: 0;
 }
 .dark-mode {
     background-color: black;
     color: white;
+}
+nav {
+    background-color: #333;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
 }
 button {
     cursor: pointer;
