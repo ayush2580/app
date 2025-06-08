@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button id="darkModeToggle">🌙 Dark Mode</button>
+    <h1>Generate Invoice</h1>
+    <form id="invoiceForm">
+        <label>Name: <input type="text" id="customerName" required></label>
+        <label>Phone: <input type="text" id="customerPhone" required></label>
+        <label>Product:
+            <select id="productSelect"></select>
+        </label>
+        <label>Price: <input type="number" id="customPrice"></label>
+        <label>Quantity: <input type="number" id="quantity" min="1" required></label>
+        <button type="submit">Generate Invoice</button>
+    </form>
+    <h2>Invoice</h2>
+    <div id="invoiceDisplay"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
